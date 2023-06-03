@@ -33,13 +33,16 @@ inverter.wait = 1
 
 def modbusAccess():
 
-    vars_inmediate = ['pv_01_voltage', 'pv_01_current', 'pv_02_voltage','pv_02_current', 'input_power', 'grid_voltage', 
-    'grid_current', 'active_power', 
-    'grid_A_voltage', 'active_grid_A_current', 'power_meter_active_power', 
+    vars_inmediate = ['input_power', 
+    'active_power', 
+    #'grid_A_voltage', 'active_grid_A_current', 
+    'power_meter_active_power', 
     'accumulated_yield_energy']
 
-    vars = ['day_active_power_peak', 'efficiency', 'internal_temperature', 'insulation_resistance', 'device_status', 'fault_code',
-    'daily_yield_energy', 'grid_exported_energy', 'grid_accumulated_energy']
+    vars = [
+        'pv_01_voltage', 'pv_01_current', 'pv_02_voltage','pv_02_current', 'grid_voltage', 'grid_current', 
+        'day_active_power_peak', 'efficiency', 'internal_temperature', 'insulation_resistance', 'device_status', 'fault_code',
+        'daily_yield_energy', 'grid_exported_energy', 'grid_accumulated_energy']
 
     clientMQTT.publish(topic="homeassistant/sensor/HuaweiInverter/pv_01_voltage/config", payload= '{"uniq_id": "pv_01_voltage", "name": "Huawei 01 Voltage", "dev_cla": "power", "stat_t": "emon/NodeHuawei/pv_01_voltage", "unit_of_meas": "V"}', qos=1, retain=False)
     clientMQTT.publish(topic="homeassistant/sensor/HuaweiInverter/pv_02_voltage/config", payload= '{"uniq_id": "pv_02_voltage", "name": "Huawei 02 Voltage", "dev_cla": "power", "stat_t": "emon/NodeHuawei/pv_02_voltage", "unit_of_meas": "V"}', qos=1, retain=False)
